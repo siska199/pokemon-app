@@ -15,7 +15,6 @@ export const getPokemons = async (limit, search) => {
     search != ""
       ? completDataPokemons.filter((data) => data.name.includes(search))
       : completDataPokemons;
-  console.log("final results: ", finalResults);
   return finalResults;
 };
 

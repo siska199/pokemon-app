@@ -16,7 +16,6 @@ class PokemonList extends HTMLElement {
   }
 
   set loadingState(state) {
-    console.log("state: ", state);
     this._loading = state;
   }
 
@@ -43,8 +42,6 @@ class PokemonList extends HTMLElement {
       </div>
     
     `;
-    console.log("loading state", this._loading);
-    console.log("data: ", this._pokemons);
     if (this._pokemons.length > 0) {
       return this._pokemons.forEach((data) => {
         const pokemonItemElmn = document.createElement("pokemon-item");

@@ -10,7 +10,6 @@ class PokemonItem extends HTMLElement {
   }
 
   render() {
-    console.log(this._data);
     this.shadoDOM.innerHTML = `
             <style>
                 .card{
