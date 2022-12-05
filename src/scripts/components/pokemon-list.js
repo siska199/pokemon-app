@@ -22,20 +22,19 @@ class PokemonList extends HTMLElement {
   render() {
     this.shadowDOM.innerHTML = `
       <style>
-      :host{
-        max-width : 1500px;
-      }
-      .container-list-pokemon{
-          margin: 2rem;
-          display : flex;
-          gap:2rem;
-          flex-wrap:wrap;
-          justify-content: center;
-      }
-      h1{
-        font-family: 'Montserrat', sans-serif;
-
-      }
+        :host{
+          max-width : 1500px;
+        }
+        .container-list-pokemon{
+            margin: 2rem;
+            display : flex;
+            gap:2rem;
+            flex-wrap:wrap;
+            justify-content: center;
+        }
+        h1{
+          font-family: 'Montserrat', sans-serif;
+        }
       </style>
 
       <div class="container-list-pokemon">
