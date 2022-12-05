@@ -11,9 +11,11 @@ export const getPokemons = async (limit, search) => {
   });
 
   const completDataPokemons = await Promise.all(pokemons);
-  const finalResults = search
-    ? completDataPokemons.filter((data) => data.name.includes(search))
-    : completDataPokemons;
+  const finalResults =
+    search != ""
+      ? completDataPokemons.filter((data) => data.name.includes(search))
+      : completDataPokemons;
+  console.log("final results: ", finalResults);
   return finalResults;
 };
 

@@ -3,12 +3,24 @@ import "../components/pokemon-list";
 import { getPokemons, getPokemon } from "../lib/utils.js";
 
 const main = async () => {
-  const searchElmn = document.querySelector("search-input");
+  const searchElmn = document
+    .querySelector("header-custome")
+    .shadowDOM.querySelector("search-input");
   const pokemonListElmn = document.querySelector("pokemon-list");
 
-  const dataPokemons = await getPokemons(30, "");
+  const handleSearchPokemons = async () => {
+    try {
+      pokemonListElmn.loadingState = true;
+      const resultData = await getPokemons(30, searchElmn.valueSearchInput);
+      pokemonListElmn.dataPokemons = resultData;
+      pokemonListElmn.loadingState = false;
+    } catch (error) {
+      throw error.message;
+    }
+  };
 
-  pokemonListElmn.dataPokemons = dataPokemons;
+  searchElmn.clickEvent = handleSearchPokemons;
+  handleSearchPokemons()
 };
 
 export default main;

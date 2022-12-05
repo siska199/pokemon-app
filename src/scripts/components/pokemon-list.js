@@ -5,6 +5,7 @@ class PokemonList extends HTMLElement {
     super();
     this.shadowDOM = this.attachShadow({ mode: "open" });
     this._pokemons = [];
+    this._loading = true;
   }
   connectedCallback() {
     this.render();
@@ -12,6 +13,11 @@ class PokemonList extends HTMLElement {
   set dataPokemons(pokemons) {
     this._pokemons = pokemons;
     this.render();
+  }
+
+  set loadingState(state) {
+    console.log("state: ", state);
+    this._loading = state;
   }
 
   render() {
@@ -27,19 +33,39 @@ class PokemonList extends HTMLElement {
           flex-wrap:wrap;
           justify-content: center;
       }
+      h1{
+        font-family: 'Montserrat', sans-serif;
+
+      }
       </style>
 
       <div class="container-list-pokemon">
       </div>
     
     `;
-    this._pokemons.forEach((data) => {
-      const pokemonItemElmn = document.createElement("pokemon-item");
-      pokemonItemElmn.data = data;
-      this.shadowDOM
-        .querySelector(".container-list-pokemon")
-        .appendChild(pokemonItemElmn);
-    });
+    console.log("loading state", this._loading);
+    console.log("data: ", this._pokemons);
+    if (this._pokemons.length > 0) {
+      return this._pokemons.forEach((data) => {
+        const pokemonItemElmn = document.createElement("pokemon-item");
+        pokemonItemElmn.data = data;
+        this.shadowDOM
+          .querySelector(".container-list-pokemon")
+          .appendChild(pokemonItemElmn);
+      });
+    } else if (this._loading) {
+      return (this.shadowDOM.querySelector(
+        ".container-list-pokemon"
+      ).innerHTML = `
+        <h1>Loading</h1>
+      `);
+    } else {
+      return (this.shadowDOM.querySelector(
+        ".container-list-pokemon"
+      ).innerHTML = `
+        <h1>Data Not Found</h1>
+      `);
+    }
   }
 }
 
